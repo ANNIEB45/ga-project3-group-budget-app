@@ -11,3 +11,5 @@ mongoose.connect(connectionString)
         console.log('failed to connect to database 😱😱😱')
         console.log(err)
     })
+
+    module.exports = mongoose

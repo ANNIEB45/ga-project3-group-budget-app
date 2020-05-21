@@ -1,12 +1,25 @@
 const express = require('express')
+const eventRouter = require('./controllers/event')
+const expenseRouter = require('./controllers/expenses')
 
 const app = express()
 
-app.get('/', (req, res) => {
-    res.json('ok')
+app.use(express.json())
+app.use(express.static(`${__dirname}/client/build`))
+
+app.use('/api/event', eventRouter)
+app.use('/api/expenses', expenseRouter)
+
+app.get('/*', (req, res) => {
+    res.sendFile(`${__dirname}/client/build/index.html`)
 })
 
-const PORT = process.env.PORT || 3000
+
+// app.get('/', (req, res) => {
+//     res.json('ok')
+// })
+
+const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
