@@ -1,2 +1,2 @@
-# **Group Budget App**
+# **Weekender Budget App**
 ### Project 3
