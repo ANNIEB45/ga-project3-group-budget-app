@@ -2,13 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-import '../App.css'
-
-
-export default class Home extends Component {
+export default class CreateEventFrom extends Component {
 
     state = {
-        allEvents: [],
         newEvent: {
             name: '',
             category: ['Vacation', 'Concert', 'CabinTrip', 'Road-Trip', 'Party'],
@@ -16,22 +12,6 @@ export default class Home extends Component {
             deadline: Date,
             budget: 0,
             note: ''
-        }
-    }
-
-    componentDidMount() {
-        this.getAllEvents()
-    }
-
-    getAllEvents = async () => {
-        try {
-            const res = await axios.get('/api/event')
-            const newState = { ...this.state }
-            newState.allEvents = res.data
-            this.setState(newState)
-        } catch (err) {
-            console.log('failed to get all books')
-            console.log(err)
         }
     }
 
@@ -46,17 +26,19 @@ export default class Home extends Component {
         console.log('i was clicked')
         try {
             await axios.post('/api/event', this.state.newEvent)
-            this.getAllEvents()
+            this.props.getAllEvents()
         } catch (err) {
             console.log('failed to create event')
             console.log(err)
         }
     }
 
+
     render() {
         return (
             <div>
-                <form onSubmit={ this.handleSubmit } className='form-field'>
+                <form
+                    onSubmit={ this.handleSubmit } className='form-field'>
                     <input
                         type='text'
                         name='name'
@@ -116,11 +98,7 @@ export default class Home extends Component {
                         onChange={ this.handleOnChange } />
 
                     <input type='submit' value='Create Event' />
-
-                </form>
-
-                
-
+                </form>  
             </div>
         )
     }

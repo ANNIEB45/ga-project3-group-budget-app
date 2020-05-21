@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
-import Home from './components/Home'
+import Home from './components/Home-Component/Home'
 
 import './App.css'
 
 export default class App extends React.Component {
-  
+
   render() {
     return (
 
