@@ -4,11 +4,15 @@ const Schema = mongoose.Schema
 
 const EventSchema = new Schema({
     name: String,
-    category: String,
+    category: {
+        type: String,
+        enum: ['Vacation', 'Concert', 'CabinTrip', 'Road-Trip', 'Party']
+    },
     date: Date,
     deadline: Date,
     budget: Number,
-    isPaid: Boolean
+    isPaid: Boolean,
+    note: String
 })
 
 const EventModel = mongoose.model('event', EventSchema)

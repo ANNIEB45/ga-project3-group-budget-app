@@ -10,5 +10,15 @@
   margin: 15px 30px;
 }
 
+.form-field{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.form-field input{
+  margin: 10px 0
+}
 
 
