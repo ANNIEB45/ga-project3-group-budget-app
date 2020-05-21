@@ -11,19 +11,33 @@ export default class Home extends Component {
         allEvents: [],
         newEvent: {
             name: '',
-            category: '',
+            category: ['Vacation', 'Concert', 'CabinTrip', 'Road-Trip', 'Party'],
             date: Date,
             deadline: Date,
             budget: 0,
-            isPaid: false,
             note: ''
         }
     }
+
+    componentDidMount() {
+        this.getAllEvents()
+    }
+
+    getAllEvents = async () => {
+        try {
+            const res = await axios.get('/api/event')
+            const newState = { ...this.state }
+            newState.allEvents = res.data
+            this.setState(newState)
+        } catch (err) {
+            console.log('failed to get all books')
+            console.log(err)
+        }
+    }
+
     handleOnChange = (evt) => {
         const newState = { ...this.state }
         newState.newEvent[evt.target.name] = evt.target.value
-        // console.log('newState', newState)
-        // console.log('evt target',evt.target.value)
         this.setState(newState)
     }
 
@@ -49,27 +63,26 @@ export default class Home extends Component {
                         placeholder='Event Name'
                         value={ this.state.newEvent.name }
                         onChange={ this.handleOnChange } />
-                    <label>Vacation</label>
-                    <input
-                        type='radio'
-                        name='category'
-                        placeholder='Category'
-                        value={ this.state.newEvent.Vacation }
-                        onChange={ this.handleOnChange } />
-                    <label>Cabin Trip</label>
-                    <input
-                        type='radio'
-                        name='category'
-                        placeholder='Category'
-                        value={ this.state.newEvent.CabinTrip }
-                        onChange={ this.handleOnChange } />
-                    <label>Concert</label>
-                    <input
-                        type='radio'
-                        name='category'
-                        placeholder='Category'
-                        value={ this.state.newEvent.Concert }
-                        onChange={ this.handleOnChange } />
+                    
+                    <div>
+                        <label>Vacation</label>
+                        <input
+                            type='checkbox'
+                            name='category' value={ this.state.newEvent.category[0] }
+                            onChange={ this.handleOnChange } />
+                        <label>Cabin Trip</label>
+                        <input
+                            type='checkbox'
+                            name='category'
+                            value={ this.state.newEvent.category[2] }
+                            onChange={ this.handleOnChange } />
+                        <label>Concert</label>
+                        <input
+                            type='checkbox'
+                            name='category'
+                            value={ this.state.newEvent.category[1] }
+                            onChange={ this.handleOnChange } />
+                    </div>
 
                     <label>Date</label>
                     <input
@@ -94,13 +107,6 @@ export default class Home extends Component {
                         value={ this.state.newEvent.budget }
                         onChange={ this.handleOnChange } />
 
-                    <label>Is It Paid for</label>
-                    <input
-                        type='text'
-                        name='isPaid'
-                        value={ this.state.newEvent.isPaid }
-                        onChange={ this.handleOnChange } />
-
                     <label>Notes</label>
                     <input
                         type='text'
@@ -112,6 +118,8 @@ export default class Home extends Component {
                     <input type='submit' value='Create Event' />
 
                 </form>
+
+                
 
             </div>
         )
