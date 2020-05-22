@@ -14,8 +14,8 @@ export default class App extends React.Component {
       <Router>
         <nav className="nav-bar">
           <Link to='/'><h1>Weekender Budget App</h1></Link>
-          <Link>Trips</Link>
-          <Link>Expenses</Link>
+          <Link>Blog</Link>
+          <Link>Podcast</Link>
         </nav>
 
         <Switch>

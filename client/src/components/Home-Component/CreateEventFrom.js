@@ -12,7 +12,8 @@ export default class CreateEventFrom extends Component {
             deadline: Date,
             budget: 0,
             note: ''
-        }
+        },
+        isPaid: false
     }
 
     handleOnChange = (evt) => {

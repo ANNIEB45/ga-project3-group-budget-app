@@ -34,9 +34,13 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <div>Create An Event</div>
-                <button>Add New Event</button>
+                <div className='create-box'>
+                    <div>Create An Event</div>
+                    <button>Add New Event</button>
+                </div>
 
+                {/* toggle create box: if no event created
+                show box but if an event is created box will disappear */}
 
                 <CreateForm
                     getAllEvents={ this.getAllEvents } />
