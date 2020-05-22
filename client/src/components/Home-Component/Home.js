@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import CreateForm from './CreateEventFrom'
+import ExpenseForm from '../Expenses-Components/expensesForm'
 
 import './Home.css'
 
@@ -42,8 +43,10 @@ export default class Home extends Component {
                 {/* toggle create box: if no event created
                 show box but if an event is created box will disappear */}
 
-                <CreateForm
-                    getAllEvents={ this.getAllEvents } />
+                {/* <CreateForm
+                    getAllEvents={ this.getAllEvents } /> */}
+                
+                <ExpenseForm />
             </div>
         )
     }
