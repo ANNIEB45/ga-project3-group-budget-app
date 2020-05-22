@@ -12,6 +12,7 @@ export default class Home extends Component {
 
     state = {
         allEvents: [],
+        showAddEventForm: false
     }
 
     componentDidMount() {
@@ -30,7 +31,10 @@ export default class Home extends Component {
         }
     }
 
-
+    toggleAddEventField = () => {
+        const showAddEventForm = !this.state.showAddEventForm;
+        this.setState({ showAddEventForm })
+    }
 
     render() {
         console.log('all events:', this.state.allEvents)
@@ -38,7 +42,7 @@ export default class Home extends Component {
             <div>
                 <div className='create-box'>
                     <div>Create An Event</div>
-                    <button>Add New Event</button>
+                    <button onClick={this.toggleAddEventField}>Add New Event</button>
                 </div>
 
                 { this.state.allEvents.map((event) => {
@@ -57,8 +61,9 @@ export default class Home extends Component {
                 {/* toggle create box: if no event created
                 show box but if an event is created box will disappear */}
 
-                <CreateForm
-                    getAllEvents={ this.getAllEvents } />
+               
+                     <CreateForm
+                        getAllEvents={ this.getAllEvents } />
 
 
             </div>

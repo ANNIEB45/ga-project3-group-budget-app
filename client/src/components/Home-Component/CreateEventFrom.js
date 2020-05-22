@@ -22,7 +22,7 @@ export default class CreateEventFrom extends Component {
             budget: 0,
             note: ''
         },
-        
+
     }
 
     handleOnChange = (evt) => {
@@ -46,44 +46,56 @@ export default class CreateEventFrom extends Component {
 
     toggleExpenseField = () => {
         const showExpenseField = !this.state.showExpenseField;
-        this.setState({showExpenseField})
+        this.setState({ showExpenseField })
     }
 
+    // toggleRadioButton = (evt) => {
+    //     const categoryValue = !this.state.newEvent.category[evt.target.value]
+    //     this.setState({categoryValue})
+    // }
+
+    // To Do: when user clicks on radio button it should change to true or change category
+    // input field to <select>
 
     render() {
         return (
             <div>
                 <form
-                    onSubmit={ this.handleSubmit } className='form-field'>
-                    <input
+                    onSubmit={ this.handleSubmit }
+                    className='form-field'>
+                    
+                    <input 
                         type="text"
                         name="name"
                         placeholder='Event Name'
                         value={ this.state.newEvent.name }
                         onChange={ this.handleOnChange } />
-                    
+
                     <div>
-                      
-                         <label>Vacation</label>
-                        { this.state.newEvent.category.vacation === false
-                            ? <input
+                        <label>Vacation
+                             <input 
                                 type='radio'
                                 name='category'
                                 value={ this.state.newEvent.category.vacation }
-                                onChange={ this.handleOnChange } /> : null }
-                        
-                        <label>Party</label>
+                                onChange={ this.handleOnChange } />
+                        </label>
+
+                        <label>Party
                         <input
-                            type='radio'
-                            name='category'
-                            value={ this.state.newEvent.category.party}
-                            onChange={ this.handleOnChange } />
-                        <label>Concert</label>
+                                type='radio'
+                                name='category'
+                                id="party"
+                                value={ this.state.newEvent.category.party }
+                                onChange={ this.handleOnChange } />
+                        </label>
+
+                        <label>Concert
                         <input
-                            type='radio'
-                            name='category'
-                            value={ this.state.newEvent.category.concert }
-                            onChange={ this.handleOnChange } />
+                                type='radio'
+                                name='category'
+                                value={ this.state.newEvent.category.concert }
+                                onChange={ this.handleOnChange } />
+                        </label>
                     </div>
 
                     <label>Date</label>
@@ -118,16 +130,16 @@ export default class CreateEventFrom extends Component {
                         onChange={ this.handleOnChange } />
 
                     <input type="submit" value="Create Event" />
-                </form>  
+                </form>
 
-                {/* When button is clicked, form will show */}
+                {/* When button is clicked, form will show */ }
                 { this.state.showExpenseField === true ? null
                     : <button onClick={ this.toggleExpenseField }>Add Expense</button> }
-            
+
                 { this.state.showExpenseField == true
                     ? <ExpenseForm
                         toggleExpenseField={ this.toggleExpenseField } /> : null }
-                
+
             </div>
         )
     }
