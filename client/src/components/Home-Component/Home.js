@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import CreateForm from './CreateEventFrom'
-import ExpenseForm from '../Expenses-Components/ExpensesForm'
+
 
 import './Home.css'
 
@@ -44,8 +44,12 @@ export default class Home extends Component {
                 { this.state.allEvents.map((event) => {
                     return (
                         <div>
-                            { event.name }
-                           
+                            <div> { event.name } </div>
+                            <div>{ event.category }</div>
+                            <div>{ event.date }</div>
+                            <div> { event.deadline }</div>
+                            <div>{ event.budget }</div>
+                            <div>{ event.note }</div>
                         </div>
                     )
                 }) }
@@ -56,7 +60,7 @@ export default class Home extends Component {
                 <CreateForm
                     getAllEvents={ this.getAllEvents } />
 
-                <ExpenseForm />
+
             </div>
         )
     }

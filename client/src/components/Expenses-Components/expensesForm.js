@@ -8,16 +8,16 @@ export default class ExpensesForm extends Component {
 
     state = {
         note: '',
-        category: [
-            'Hotel',
-            'Flight',
-            'Entertainment',
-            'Food',
-            'Transportation',
-            'Ticket',
-            'Fees & Charges',
+        category: {
+            hotel: false,
+            flight: false,
+            entertainment: false,
+            food: false,
+            transportation: false,
+            ticket: false,
+            'Fees & Charges': false,
+        },
 
-        ],
         amount: 0,
         savedAmt: 0
     }
@@ -39,67 +39,66 @@ export default class ExpensesForm extends Component {
             <div>
                 <form onSubmit={ this.handleOnSubmit }>
 
-                    {/* <div className="categories"> */ }
-                    
+                    <div className="categories"> 
+
                     <span className="material-icons">
                         flight
                     </span>
                     <input
-                       
-                        type="checkbox"
+
+                        type="radio"
                         name="category"
-                        value={ this.state.category[1] }
+                        value={ this.state.category.hotel }
                         placeholder="Flight"
                         onChange={ this.handleOnChange }
-                        
-                        
+
+
                     />
-                    
-                    {/*} <label>Flight</label>
+
+                    } <label>Flight</label>
                         <input
-                            type="checkbox"
+                            type="radio"
                             name="category"
-                            value={ this.state.category[1] }
+                            value={ this.state.category.flight }
                             onChange={ this.handleOnChange }
                         />
                         <label>Entertainment</label>
                         <input
-                            type="checkbox"
+                            type="radio"
                             name="category"
-                            value={ this.state.category[2] }
+                            value={ this.state.category.entertainment }
                             onChange={ this.handleOnChange }
                         />
                         <label>Food</label>
                         <input
-                            type="checkbox"
+                            type="radio"
                             name="category"
-                            value={ this.state.category[3] }
+                            value={ this.state.category.food }
                             onChange={ this.handleOnChange }
                         />
                         <label>Transportation</label>
                         <input
-                            type="checkbox"
+                            type="radio"
                             name="category"
-                            value={ this.state.category[4] }
+                            value={ this.state.category.transportation }
                             onChange={ this.handleOnChange }
                         />
                         <label>Ticket</label>
                         <input
-                            type="checkbox"
+                            type="radio"
                             name="category"
-                            value={ this.state.category[5] }
+                            value={ this.state.category.ticket }
                             onChange={ this.handleOnChange }
                         />
                         <label>Fees and Charges</label>
                         <input
-                            type="checkbox"
+                            type="radio"
                             name="category"
-                            value={ this.state.category[6] }
+                            value={ this.state.category["Fees & Charges"] }
                             onChange={ this.handleOnChange }
                         />
-                    </div> */}
+                    </div>
 
-                    {/* <Icons /> */ }
 
                     <label>Amount</label>
                     <input
@@ -126,7 +125,14 @@ export default class ExpensesForm extends Component {
                         value={ this.state.note }
                         onChange={ this.handleOnChange }></textarea>
 
-                    <input type="submit" value="Add Expense" />
+
+                    <input
+                        onClick={ this.props.toggleExpenseField }
+                        type="submit"
+                        value="Create Expense"
+                        
+                    />
+                    
 
                 </form>
 

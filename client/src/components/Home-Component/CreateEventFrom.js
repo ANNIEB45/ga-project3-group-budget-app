@@ -2,18 +2,27 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import ExpenseForm from '../Expenses-Components/ExpensesForm'
+
 export default class CreateEventFrom extends Component {
 
     state = {
+        isPaid: false,
+        showExpenseField: false,
         newEvent: {
             name: '',
-            category: ['Vacation', 'Concert', 'CabinTrip', 'Road-Trip', 'Party'],
+            category: {
+                vacation: false,
+                concert: false,
+                party: false
+
+            },
             date: Date,
             deadline: Date,
             budget: 0,
             note: ''
         },
-        isPaid: false
+        
     }
 
     handleOnChange = (evt) => {
@@ -35,6 +44,11 @@ export default class CreateEventFrom extends Component {
         }
     }
 
+    toggleExpenseField = () => {
+        const showExpenseField = !this.state.showExpenseField;
+        this.setState({showExpenseField})
+    }
+
 
     render() {
         return (
@@ -49,23 +63,26 @@ export default class CreateEventFrom extends Component {
                         onChange={ this.handleOnChange } />
                     
                     <div>
-                        <label>Vacation</label>
+                      
+                         <label>Vacation</label>
+                        { this.state.newEvent.category.vacation === false
+                            ? <input
+                                type='radio'
+                                name='category'
+                                value={ this.state.newEvent.category.vacation }
+                                onChange={ this.handleOnChange } /> : null }
+                        
+                        <label>Party</label>
                         <input
-                            type='checkbox'
+                            type='radio'
                             name='category'
-                            value={ this.state.newEvent.category[0] }
-                            onChange={ this.handleOnChange } />
-                        <label>Cabin Trip</label>
-                        <input
-                            type='checkbox'
-                            name='category'
-                            value={ this.state.newEvent.category[2] }
+                            value={ this.state.newEvent.category.party}
                             onChange={ this.handleOnChange } />
                         <label>Concert</label>
                         <input
-                            type='checkbox'
+                            type='radio'
                             name='category'
-                            value={ this.state.newEvent.category[1] }
+                            value={ this.state.newEvent.category.concert }
                             onChange={ this.handleOnChange } />
                     </div>
 
@@ -102,6 +119,15 @@ export default class CreateEventFrom extends Component {
 
                     <input type="submit" value="Create Event" />
                 </form>  
+
+                {/* When button is clicked, form will show */}
+                { this.state.showExpenseField === true ? null
+                    : <button onClick={ this.toggleExpenseField }>Add Expense</button> }
+            
+                { this.state.showExpenseField == true
+                    ? <ExpenseForm
+                        toggleExpenseField={ this.toggleExpenseField } /> : null }
+                
             </div>
         )
     }

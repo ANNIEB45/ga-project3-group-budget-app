@@ -1,6 +1,6 @@
 const express = require('express')
-const eventRouter = require('./controllers/event')
-const expenseRouter = require('./controllers/expenses')
+const eventRouter = require('./controllers/event.js')
+const expenseRouter = require('./controllers/expenses.js')
 
 const app = express()
 
