@@ -29,7 +29,7 @@ expenseRouter.get('/:expenseId', (req, res) => {
     })
 })
 
-//Post
+//Create(Post)
 expenseRouter.post('/', (req, res) => {
     expenseModel.createExpense(req.body)
     .then(()=> {
@@ -42,7 +42,7 @@ expenseRouter.post('/', (req, res) => {
     })
 })
 
-//Put
+//Update(Put)
 expenseRouter.put('/:expenseId', (req, res) => {
     expenseModel.updateExpense(req.params.expenseId, req.body)
     .then(()=> {

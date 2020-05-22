@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Icons from './Categories'
 
 import './Expenses.css'
+import { Link } from 'react-router-dom'
 
-export default class expensesForm extends Component {
+export default class ExpensesForm extends Component {
 
     state = {
         note: '',
@@ -17,25 +18,44 @@ export default class expensesForm extends Component {
             'Fees & Charges',
 
         ],
-        amount: '',
-        savedAmt: ''
+        amount: 0,
+        savedAmt: 0
+    }
+
+    handleOnChange = (evt) => {
+        const newState = { ...this.state }
+        newState[evt.target.name] = evt.target.value
+        this.setState(newState)
+        console.log(evt.target.value)
+    }
+
+    handleOnSubmit = async (evt) => {
+        evt.preventDefault()
+        console.log('i was clicked')
     }
 
     render() {
         return (
             <div>
                 <form onSubmit={ this.handleOnSubmit }>
+
+                    {/* <div className="categories"> */ }
                     
-                    {/* <div className="categories">
-                        <label>Choose a Category</label>
-                        <label>Hotel</label>
-                        <input
-                            type="checkbox"
-                            name="category"
-                            value={ this.state.category[0] }
-                            onChange={ this.handleOnChange }
-                        />
-                        <label>Flight</label>
+                    <span className="material-icons">
+                        flight
+                    </span>
+                    <input
+                       
+                        type="checkbox"
+                        name="category"
+                        value={ this.state.category[1] }
+                        placeholder="Flight"
+                        onChange={ this.handleOnChange }
+                        
+                        
+                    />
+                    
+                    {/*} <label>Flight</label>
                         <input
                             type="checkbox"
                             name="category"
@@ -79,26 +99,32 @@ export default class expensesForm extends Component {
                         />
                     </div> */}
 
-                    <Icons />
+                    {/* <Icons /> */ }
 
                     <label>Amount</label>
                     <input
-                        type="text"
+                        type="number"
                         name="amount"
+                        min="0"
+                        step="0.01"
                         value={ this.state.amount }
                         onChange={ this.handleOnChange } />
                     <label>Amount Saved</label>
                     <input
-                        type="text"
+                        type="number"
                         name="savedAmt"
+                        min="0"
+                        step="0.01"
                         value={ this.state.savedAmt }
                         onChange={ this.handleOnChange } />
                     <label>Notes</label>
-                    <input
+                    <textarea
                         type="text"
                         name="note"
+                        cols="60"
+                        rows="10"
                         value={ this.state.note }
-                        onChange={ this.handleOnChange } />
+                        onChange={ this.handleOnChange }></textarea>
 
                     <input type="submit" value="Add Expense" />
 

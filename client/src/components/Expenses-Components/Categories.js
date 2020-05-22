@@ -4,7 +4,7 @@ export default class Categories extends Component {
     render() {
         return (
             <div>
-                <span class="material-icons">
+                <span className="material-icons">
                     flight
             </span>
                 

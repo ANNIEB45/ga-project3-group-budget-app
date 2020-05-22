@@ -20,6 +20,7 @@ export default class CreateEventFrom extends Component {
         const newState = { ...this.state }
         newState.newEvent[evt.target.name] = evt.target.value
         this.setState(newState)
+        console.log(evt.target.value)
     }
 
     handleSubmit = async (evt) => {
@@ -51,7 +52,8 @@ export default class CreateEventFrom extends Component {
                         <label>Vacation</label>
                         <input
                             type='checkbox'
-                            name='category' value={ this.state.newEvent.category[0] }
+                            name='category'
+                            value={ this.state.newEvent.category[0] }
                             onChange={ this.handleOnChange } />
                         <label>Cabin Trip</label>
                         <input

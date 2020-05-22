@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import CreateForm from './CreateEventFrom'
-import ExpenseForm from '../Expenses-Components/expensesForm'
+import ExpenseForm from '../Expenses-Components/ExpensesForm'
 
 import './Home.css'
 
@@ -25,7 +25,7 @@ export default class Home extends Component {
             newState.allEvents = res.data.reverse()
             this.setState(newState)
         } catch (err) {
-            console.log('failed to get all books')
+            console.log('failed to get all events')
             console.log(err)
         }
     }
@@ -33,6 +33,7 @@ export default class Home extends Component {
 
 
     render() {
+        console.log('all events:', this.state.allEvents)
         return (
             <div>
                 <div className='create-box'>
@@ -40,12 +41,21 @@ export default class Home extends Component {
                     <button>Add New Event</button>
                 </div>
 
+                { this.state.allEvents.map((event) => {
+                    return (
+                        <div>
+                            { event.name }
+                           
+                        </div>
+                    )
+                }) }
+
                 {/* toggle create box: if no event created
                 show box but if an event is created box will disappear */}
 
-                {/* <CreateForm
-                    getAllEvents={ this.getAllEvents } /> */}
-                
+                <CreateForm
+                    getAllEvents={ this.getAllEvents } />
+
                 <ExpenseForm />
             </div>
         )

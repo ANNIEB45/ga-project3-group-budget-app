@@ -10,7 +10,7 @@ eventRouter.get('/', (req, res) => {
         res.json(allEvents)
     })
         .catch(err => {
-            res.statusCode(500).json(err)
+            res.status(500).json(err)
             console.log('failed to get all event 😟😟😟😟 ')
             console.log(err)
     })
@@ -23,33 +23,33 @@ eventRouter.get('/:eventId', (req, res) => {
         res.json(singleEvent)
     })
         .catch(err => {
-            res.statusCode(500).json(err)
+            res.status(500).json(err)
             console.log('failed to get one event 😟😟😟😟 ')
             console.log(err)
     })
 })
 
-//Post
+//Create(Post)
 eventRouter.post('/', (req, res) => {
     eventModel.createEvent(req.body)
     .then(()=> {
         res.json('created')
     })
         .catch(err => {
-            res.statusCode(500).json(err)
+            res.status(500).json(err)
             console.log('failed to create event 😟😟😟😟 ')
             console.log(err)
     })
 })
 
-//Put
+//Update(Put)
 eventRouter.put('/:eventId', (req, res) => {
     eventModel.updateEvent(req.params.eventId, req.body)
     .then(()=> {
         res.json('updated')
     })
         .catch(err => {
-            res.statusCode(500).json(err)
+            res.status(500).json(err)
             console.log('failed to update event 😟😟😟😟 ')
             console.log(err)
     })
@@ -63,7 +63,7 @@ eventRouter.delete('/:eventId', (req, res) => {
         res.json('deleted')
     })
         .catch(err => {
-            res.statusCode(500).json(err)
+            res.status(500).json(err)
             console.log('failed to delete event 😟😟😟😟 ')
             console.log(err)
     })
