@@ -21,7 +21,7 @@ export default class Home extends Component {
         try {
             const res = await axios.get('/api/event')
             const newState = { ...this.state }
-            newState.allEvents = res.data
+            newState.allEvents = res.data.reverse()
             this.setState(newState)
         } catch (err) {
             console.log('failed to get all books')
@@ -34,6 +34,10 @@ export default class Home extends Component {
     render() {
         return (
             <div>
+                <div>Create An Event</div>
+                <button>Add New Event</button>
+
+
                 <CreateForm
                     getAllEvents={ this.getAllEvents } />
             </div>

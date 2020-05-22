@@ -24,7 +24,6 @@ export default class CreateEventFrom extends Component {
     handleSubmit = async (evt) => {
         evt.preventDefault()
         console.log('i was clicked')
-        const newEventData = {newEvent : this.state.newEvent}
         try {
             await axios.post('/api/event', this.state.newEvent)
             this.props.getAllEvents()
