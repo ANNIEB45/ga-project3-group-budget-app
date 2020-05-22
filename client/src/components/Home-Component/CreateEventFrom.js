@@ -24,6 +24,7 @@ export default class CreateEventFrom extends Component {
     handleSubmit = async (evt) => {
         evt.preventDefault()
         console.log('i was clicked')
+        const newEventData = {newEvent : this.state.newEvent}
         try {
             await axios.post('/api/event', this.state.newEvent)
             this.props.getAllEvents()
@@ -40,8 +41,8 @@ export default class CreateEventFrom extends Component {
                 <form
                     onSubmit={ this.handleSubmit } className='form-field'>
                     <input
-                        type='text'
-                        name='name'
+                        type="text"
+                        name="name"
                         placeholder='Event Name'
                         value={ this.state.newEvent.name }
                         onChange={ this.handleOnChange } />
@@ -97,7 +98,7 @@ export default class CreateEventFrom extends Component {
                         value={ this.state.newEvent.note }
                         onChange={ this.handleOnChange } />
 
-                    <input type='submit' value='Create Event' />
+                    <input type="submit" value="Create Event" />
                 </form>  
             </div>
         )
