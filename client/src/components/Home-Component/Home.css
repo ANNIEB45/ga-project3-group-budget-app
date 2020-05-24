@@ -19,3 +19,13 @@
     margin: 10px 20px;
     padding: 10px 15px;
   }
+
+  .allEvent-form{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 23px 12px;
+    padding: 20px 10px;
+    border: 2px solid black;
+  }

@@ -8,15 +8,9 @@ export default class CreateEventFrom extends Component {
 
     state = {
         isPaid: false,
-        showExpenseField: false,
+        // showExpenseField: false,
         newEvent: {
             name: '',
-            category: {
-                vacation: false,
-                concert: false,
-                party: false
-
-            },
             date: Date,
             deadline: Date,
             budget: 0,
@@ -44,10 +38,10 @@ export default class CreateEventFrom extends Component {
         }
     }
 
-    toggleExpenseField = () => {
-        const showExpenseField = !this.state.showExpenseField;
-        this.setState({ showExpenseField })
-    }
+    // toggleExpenseField = () => {
+    //     const showExpenseField = !this.state.showExpenseField;
+    //     this.setState({ showExpenseField })
+    // }
 
     // toggleRadioButton = (evt) => {
     //     const categoryValue = !this.state.newEvent.category[evt.target.value]
@@ -63,40 +57,13 @@ export default class CreateEventFrom extends Component {
                 <form
                     onSubmit={ this.handleSubmit }
                     className='form-field'>
-                    
-                    <input 
+
+                    <input
                         type="text"
                         name="name"
                         placeholder='Event Name'
                         value={ this.state.newEvent.name }
                         onChange={ this.handleOnChange } />
-
-                    <div>
-                        <label>Vacation
-                             <input 
-                                type='radio'
-                                name='category'
-                                value={ this.state.newEvent.category.vacation }
-                                onChange={ this.handleOnChange } />
-                        </label>
-
-                        <label>Party
-                        <input
-                                type='radio'
-                                name='category'
-                                id="party"
-                                value={ this.state.newEvent.category.party }
-                                onChange={ this.handleOnChange } />
-                        </label>
-
-                        <label>Concert
-                        <input
-                                type='radio'
-                                name='category'
-                                value={ this.state.newEvent.category.concert }
-                                onChange={ this.handleOnChange } />
-                        </label>
-                    </div>
 
                     <label>Date</label>
                     <input
@@ -129,16 +96,19 @@ export default class CreateEventFrom extends Component {
                         value={ this.state.newEvent.note }
                         onChange={ this.handleOnChange } />
 
-                    <input type="submit" value="Create Event" />
+                    <input
+                        onClick={ this.props.toggleAddEventField }
+                        type="submit"
+                        value="Create Event" />
                 </form>
 
-                {/* When button is clicked, form will show */ }
-                { this.state.showExpenseField === true ? null
-                    : <button onClick={ this.toggleExpenseField }>Add Expense</button> }
 
-                { this.state.showExpenseField == true
-                    ? <ExpenseForm
-                        toggleExpenseField={ this.toggleExpenseField } /> : null }
+
+                {/* When button is clicked, expense form will show */ }
+                {/* { this.state.showExpenseField === true ? null
+                    : <button onClick={ this.toggleExpenseField }>Add Expense</button> } */}
+
+
 
             </div>
         )

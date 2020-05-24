@@ -1,30 +1,42 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import Icons from './Categories'
+import { Link } from 'react-router-dom'
 
 import './Expenses.css'
-import { Link } from 'react-router-dom'
+
 
 export default class ExpensesForm extends Component {
 
     state = {
-        note: '',
-        category: {
-            hotel: false,
-            flight: false,
-            entertainment: false,
-            food: false,
-            transportation: false,
-            ticket: false,
-            'Fees & Charges': false,
-        },
-
-        amount: 0,
-        savedAmt: 0
+        allExpenses: [],
+        newExpenses: {
+            note: '',
+            amount: 0,
+            savedAmt: 0
+        }
     }
+
+    componentDidMount() {
+        this.getAllExpenses()
+    }
+
+    getAllExpenses = async () => {
+        try {
+            const res = await axios.get('/api/event')
+            const newState = { ...this.state }
+            newState.allEvents = res.data
+            this.setState(newState)
+        } catch (err) {
+            console.log('failed to get all events')
+            console.log(err)
+        }
+    }
+
 
     handleOnChange = (evt) => {
         const newState = { ...this.state }
-        newState[evt.target.name] = evt.target.value
+        newState.newExpenses[evt.target.name] = evt.target.value
         this.setState(newState)
         console.log(evt.target.value)
     }
@@ -32,97 +44,46 @@ export default class ExpensesForm extends Component {
     handleOnSubmit = async (evt) => {
         evt.preventDefault()
         console.log('i was clicked')
+        try {
+            await axios.post('/api/event', this.state.newExpenses)
+            this.getAllExpenses()
+        } catch (err) {
+            console.log('failed to create event')
+            console.log(err)
+        }
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={ this.handleOnSubmit }>
-
-                    <div className="categories"> 
-
-                    <span className="material-icons">
-                        flight
-                    </span>
-                    <input
-
-                        type="radio"
-                        name="category"
-                        value={ this.state.category.hotel }
-                        placeholder="Flight"
-                        onChange={ this.handleOnChange }
-
-
-                    />
-
-                    } <label>Flight</label>
-                        <input
-                            type="radio"
-                            name="category"
-                            value={ this.state.category.flight }
-                            onChange={ this.handleOnChange }
-                        />
-                        <label>Entertainment</label>
-                        <input
-                            type="radio"
-                            name="category"
-                            value={ this.state.category.entertainment }
-                            onChange={ this.handleOnChange }
-                        />
-                        <label>Food</label>
-                        <input
-                            type="radio"
-                            name="category"
-                            value={ this.state.category.food }
-                            onChange={ this.handleOnChange }
-                        />
-                        <label>Transportation</label>
-                        <input
-                            type="radio"
-                            name="category"
-                            value={ this.state.category.transportation }
-                            onChange={ this.handleOnChange }
-                        />
-                        <label>Ticket</label>
-                        <input
-                            type="radio"
-                            name="category"
-                            value={ this.state.category.ticket }
-                            onChange={ this.handleOnChange }
-                        />
-                        <label>Fees and Charges</label>
-                        <input
-                            type="radio"
-                            name="category"
-                            value={ this.state.category["Fees & Charges"] }
-                            onChange={ this.handleOnChange }
-                        />
-                    </div>
-
-
+                <form className='expense-form'
+                    onSubmit={ this.handleOnSubmit }>
+                    
                     <label>Amount</label>
                     <input
                         type="number"
                         name="amount"
                         min="0"
                         step="0.01"
-                        value={ this.state.amount }
+                        value={ this.state.newExpenses.amount }
                         onChange={ this.handleOnChange } />
+                    
                     <label>Amount Saved</label>
                     <input
                         type="number"
                         name="savedAmt"
                         min="0"
                         step="0.01"
-                        value={ this.state.savedAmt }
+                        value={ this.state.newExpenses.savedAmt }
                         onChange={ this.handleOnChange } />
+                    
                     <label>Notes</label>
                     <textarea
                         type="text"
                         name="note"
                         cols="60"
                         rows="10"
-                        value={ this.state.note }
+                        value={ this.state.newExpenses.note }
                         onChange={ this.handleOnChange }></textarea>
 
 
@@ -132,9 +93,19 @@ export default class ExpensesForm extends Component {
                         value="Create Expense"
                         
                     />
-                    
-
                 </form>
+
+                { this.state.allExpenses.map((expense) => {
+                    return (
+                        <div>
+                            <div>{ expense.category }</div>
+                            <div>{ expense.amount }</div>
+                            <div>{ expense.savedAmt }</div>
+                            <div>{ expense.note }</div>
+                        </div>
+                    )
+                }) }
+
 
             </div>
         )

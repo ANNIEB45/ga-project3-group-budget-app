@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 
 import CreateForm from './CreateEventFrom'
 
+import ExpenseForm from '../Expenses-Components/ExpensesForm'
+
+
 
 import './Home.css'
 
@@ -12,7 +15,9 @@ export default class Home extends Component {
 
     state = {
         allEvents: [],
-        showAddEventForm: false
+        showAddEventForm: false,
+        showExpenseField: false,
+
     }
 
     componentDidMount() {
@@ -31,9 +36,19 @@ export default class Home extends Component {
         }
     }
 
+    onDeleteBook = async (eventId) => {
+        await axios.delete(`/api/event/${eventId}`)
+        this.getAllEvents()
+    }
+
     toggleAddEventField = () => {
         const showAddEventForm = !this.state.showAddEventForm;
         this.setState({ showAddEventForm })
+    }
+
+    toggleExpenseField = () => {
+        const showExpenseField = !this.state.showExpenseField;
+        this.setState({ showExpenseField })
     }
 
     render() {
@@ -42,18 +57,21 @@ export default class Home extends Component {
             <div>
                 <div className='create-box'>
                     <div>Create An Event</div>
-                    <button onClick={this.toggleAddEventField}>Add New Event</button>
+                    <button onClick={ this.toggleAddEventField }>Add New Event</button>
                 </div>
 
                 { this.state.allEvents.map((event) => {
                     return (
-                        <div>
+                        <div className='allEvent-form'>
                             <div> { event.name } </div>
                             <div>{ event.category }</div>
-                            <div>{ event.date }</div>
-                            <div> { event.deadline }</div>
-                            <div>{ event.budget }</div>
-                            <div>{ event.note }</div>
+                            <div>Date of Event:{ event.date }</div>
+                            <div>Deadline: { event.deadline }</div>
+                            <div>Budget:{ event.budget }</div>
+                            <div>Notes:{ event.note }</div>
+                            <button onClick={ () => this.onDeleteBook(event._id) }>Delete</button>
+                            { this.state.showExpenseField === true ? null
+                                : <button onClick={ this.toggleExpenseField }>Add Expense</button> }
                         </div>
                     )
                 }) }
@@ -61,9 +79,19 @@ export default class Home extends Component {
                 {/* toggle create box: if no event created
                 show box but if an event is created box will disappear */}
 
-               
-                     <CreateForm
-                        getAllEvents={ this.getAllEvents } />
+                { this.state.showAddEventForm === true
+                    ? <CreateForm
+                        toggleAddEventField={ this.toggleAddEventField }
+                        getAllEvents={ this.getAllEvents } /> : null }
+
+
+                { this.state.showExpenseField === true
+                    ? <ExpenseForm
+                        getAllEvents={ this.getAllEvents }
+                        toggleExpenseField={ this.toggleExpenseField } /> : null }
+
+
+
 
 
             </div>
