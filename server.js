@@ -10,7 +10,7 @@ app.use(express.static(`${__dirname}/client/build`))
 
 app.use('/api/event', eventRouter)
 app.use('/api/expenses', expenseRouter)
-api.use('/api/blog', blogRouter)
+app.use('/api/blog', blogRouter)
 
 app.get('/*', (req, res) => {
     res.sendFile(`${__dirname}/client/build/index.html`)
