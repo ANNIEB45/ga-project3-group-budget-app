@@ -36,9 +36,14 @@ export default class Home extends Component {
         }
     }
 
-    onDeleteBook = async (eventId) => {
-        await axios.delete(`/api/event/${eventId}`)
-        this.getAllEvents()
+    onDeleteEvent = async (eventId) => {
+        try {
+            await axios.delete(`/api/event/${eventId}`)
+            this.getAllEvents()
+        } catch (err) {
+            console.log('failed to delete event')
+            console.log(err)
+        }
     }
 
     toggleAddEventField = () => {
@@ -70,7 +75,7 @@ export default class Home extends Component {
                             <div>Budget:{ event.budget }</div>
                             <div>Notes:{ event.note }</div>
 
-                            <button onClick={ () => this.onDeleteBook(event._id) }>Delete</button>
+                            <button onClick={ () => this.onDeleteEvent(event._id) }>Delete</button>
 
                             <button onClick={ () => this.toggleExpenseField }>Add Expense</button>
                            
