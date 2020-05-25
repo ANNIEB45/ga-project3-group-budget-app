@@ -71,7 +71,7 @@ export default class Home extends Component {
                             <div>Notes:{ event.note }</div>
                             <button onClick={ () => this.onDeleteBook(event._id) }>Delete</button>
                             { this.state.showExpenseField === true ? null
-                                : <button onClick={ this.toggleExpenseField }>Add Expense</button> }
+                                : <button onClick={ this.toggleExpenseField }>Add  Expense</button> }
                         </div>
                     )
                 }) }

@@ -58,7 +58,7 @@ export default class ExpensesForm extends Component {
             <div>
                 <form className='expense-form'
                     onSubmit={ this.handleOnSubmit }>
-                    
+
                     <label>Amount</label>
                     <input
                         type="number"
@@ -67,7 +67,7 @@ export default class ExpensesForm extends Component {
                         step="0.01"
                         value={ this.state.newExpenses.amount }
                         onChange={ this.handleOnChange } />
-                    
+
                     <label>Amount Saved</label>
                     <input
                         type="number"
@@ -76,7 +76,7 @@ export default class ExpensesForm extends Component {
                         step="0.01"
                         value={ this.state.newExpenses.savedAmt }
                         onChange={ this.handleOnChange } />
-                    
+
                     <label>Notes</label>
                     <textarea
                         type="text"
@@ -87,12 +87,11 @@ export default class ExpensesForm extends Component {
                         onChange={ this.handleOnChange }></textarea>
 
 
-                    <input
-                        onClick={ this.props.toggleExpenseField }
+                    { this.props.showExpenseField ? null
+                       : < input
                         type="submit"
                         value="Create Expense"
-                        
-                    />
+                            /> }
                 </form>
 
                 { this.state.allExpenses.map((expense) => {

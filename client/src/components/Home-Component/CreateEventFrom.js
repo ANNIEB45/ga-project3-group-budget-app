@@ -96,10 +96,10 @@ export default class CreateEventFrom extends Component {
                         value={ this.state.newEvent.note }
                         onChange={ this.handleOnChange } />
 
-                    <input
-                        onClick={ this.props.toggleAddEventField }
+                    {this.props.showAddEventForm ? null
+                     : <input
                         type="submit"
-                        value="Create Event" />
+                    value="Create Event" />  }
                 </form>
 
 
