@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class NewBlogForm extends Component {
     state = {
@@ -11,6 +12,18 @@ export default class NewBlogForm extends Component {
         }
     }
 
+    handleOnchange = (evt) => {
+        const newState = { ...this.state }
+        newState.newBlog[evt.target.name] = evt.target.value
+        this.setState(newState)
+        console.log(evt.target.value)
+    }
+
+    handleSubmit = (evt) => {
+        evt.preventDefault()
+        
+          
+    }
 
     render() {
         return (

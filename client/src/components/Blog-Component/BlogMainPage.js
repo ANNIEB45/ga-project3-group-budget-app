@@ -9,15 +9,30 @@ export default class BlogMainPage extends React.Component {
 
     state = {
         allBlogs: [],
-        
+
     }
 
+    componentDidMount() {
+
+    }
+
+    getAllBlogs = async () => {
+        try {
+            const res = await axios.get('/api/blog')
+            const newState = { ...this.state }
+            newState.allBlogs = res.data.reverse()
+            this.setState(newState)
+        } catch (err) {
+            console.log('failed to get all events')
+            console.log(err)
+        }
+    }
     render() {
         return (
             <div>
                 <div>Weekender Blog</div>
                 {/* hero-type banner w/title and h3-heading w/caption */ }
-                
+
                 {/* Links to different section of blog page:
                 Link:homepage, article page, resources page */}
                 <div>
@@ -29,14 +44,16 @@ export default class BlogMainPage extends React.Component {
                     <Link to='#'>Github</Link>
 
                 </div>
-                <BlogForm />
+                <BlogForm
 
-                { this.state.allBlogs.map((blog) => {
-                    return (
-                        <div>
-                        </div>
-                    )
-                }) }
+
+                    { this.state.allBlogs.map((blog) => {
+                        return (
+                            <div>
+                                <div>{ blog.title }</div>
+                            </div>
+                        )
+                    }) }
 
             </div>
 
