@@ -27,11 +27,13 @@ export default class App extends React.Component {
             <Route exact path='/blog/resources' />
           </Switch>
 
-        </Router>
-
-        <footer className='footer'>
+          <footer className='footer'>
           <div>footer Info here</div>
         </footer>
+
+        </Router>
+
+       
 
       </div>
 
