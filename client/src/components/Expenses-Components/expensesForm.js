@@ -87,8 +87,8 @@ export default class ExpensesForm extends Component {
                         onChange={ this.handleOnChange }></textarea>
 
 
-                    { this.props.showExpenseField ? null
-                       : < input
+                    { this.props.showExpenseField === true ? null
+                       : < input onClick={this.props.showExpenseField}
                         type="submit"
                         value="Create Expense"
                             /> }
