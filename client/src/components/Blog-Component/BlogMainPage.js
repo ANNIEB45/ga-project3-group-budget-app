@@ -13,6 +13,7 @@ export default class BlogMainPage extends React.Component {
     }
 
     componentDidMount() {
+        this.getAllBlogs()
 
     }
 
@@ -20,13 +21,24 @@ export default class BlogMainPage extends React.Component {
         try {
             const res = await axios.get('/api/blog')
             const newState = { ...this.state }
-            newState.allBlogs = res.data.reverse()
+            newState.allBlogs = res.data
             this.setState(newState)
         } catch (err) {
-            console.log('failed to get all events')
+            console.log('failed to get all blog')
             console.log(err)
         }
     }
+
+    onDeleteBlog = async (blogId) => {
+        try {
+            await axios.delete(`/api/blog/${blogId}`)
+            this.getAllBlogs()
+        } catch (err) {
+            console.log('failed to delete blog')
+            console.log(err)
+        }
+    }
+
     render() {
         return (
             <div>
@@ -45,12 +57,20 @@ export default class BlogMainPage extends React.Component {
 
                 </div>
                 <BlogForm
+                    getAllBlogs={ this.getAllBlogs }/>
 
 
                     { this.state.allBlogs.map((blog) => {
                         return (
                             <div>
+                                <img src={ blog.image } />
+                                <Link to={`/blog/${blog._id}`}>
                                 <div>{ blog.title }</div>
+                                    <div>{ blog.author }</div>
+                                    </Link>
+                                <div>{ blog.date }</div>
+                                <div>{ blog.post }</div>
+                                <button onClick={ () => this.onDeleteBlog(blog._id) }>Delete</button>
                             </div>
                         )
                     }) }
