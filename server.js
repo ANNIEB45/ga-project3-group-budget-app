@@ -12,6 +12,8 @@ app.use('/api/event', eventRouter)
 app.use('/api/expenses', expenseRouter)
 app.use('/api/blog', blogRouter)
 
+console.log(blogRouter)
+
 app.get('/*', (req, res) => {
     res.sendFile(`${__dirname}/client/build/index.html`)
 })
