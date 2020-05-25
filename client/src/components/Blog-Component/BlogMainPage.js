@@ -2,17 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+//Components
+import BlogForm from './NewBlogForm'
+
 export default class BlogMainPage extends React.Component {
 
     state = {
         allBlogs: [],
-        newBlog: {
-            title: '',
-            author: '',
-            date: Date,
-            post: '',
-            image: ''
-        }
+        
     }
 
     render() {
@@ -32,6 +29,7 @@ export default class BlogMainPage extends React.Component {
                     <Link to='#'>Github</Link>
 
                 </div>
+                <BlogForm />
 
                 { this.state.allBlogs.map((blog) => {
                     return (
