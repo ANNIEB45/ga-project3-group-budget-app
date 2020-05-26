@@ -73,8 +73,8 @@ export default class BlogMainPage extends React.Component {
 
                     </div>
                 </div>
-                <BlogForm
-                    getAllBlogs={ this.getAllBlogs }/>
+                {/* <BlogForm
+                    getAllBlogs={ this.getAllBlogs }/> */}
 
 
                 { this.state.allBlogs.map((blog) => {
@@ -87,8 +87,8 @@ export default class BlogMainPage extends React.Component {
                                         <div className='title'>{ blog.title }</div>
                                         <div className='author'>{ blog.author }</div>
                                     </Link>
-                                    <div>{ blog.post }</div>
-                                    <button onClick={() => this.onDeleteBlog}>Delete</button>
+                                    <div className="headline">{ blog.headline }</div>
+                                    {/* <button onClick={() => this.onDeleteBlog(blog._id)}>Delete</button> */}
                                 </div>
                             </div>
                         </div>

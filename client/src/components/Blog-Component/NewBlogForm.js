@@ -8,7 +8,8 @@ export default class NewBlogForm extends Component {
             author: '',
             date: Date,
             post: '',
-            image: ''
+            image: '',
+            headline: ''
         }
     }
 
@@ -63,11 +64,21 @@ export default class NewBlogForm extends Component {
                         name="date"
                         value={ this.state.newBlog.date }
                         onChange={ this.handleOnchange } />
+                    
+                    <textarea
+                        type="text"
+                        name="headline"
+                        rows="5"
+                        cols="20"
+                        maxLength="100"
+                        placeholder="Post headline"
+                        value={ this.state.newBlog.headline }
+                        onChange={ this.handleOnchange } ></textarea>
 
                     <textarea
                         type="text"
                         name="post"
-                        rows="5"
+                        rows="10"
                         cols="20"
                         placeholder="Write your post here"
                         value={ this.state.newBlog.post }

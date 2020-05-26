@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export default class SingleBlog extends Component{
+export default class SingleBlog extends Component {
 
     state = {
-            title: '',
-            author: '',
-            date: '',
-            post: '',
-            image: ''
-        
+        title: '',
+        author: '',
+        date: '',
+        post: '',
+        image: '',
+        headline: ''
+
     }
 
     componentDidMount() {
@@ -29,21 +30,25 @@ export default class SingleBlog extends Component{
         }
     }
 
-    
+
     render() {
         return (
-            <div>
-                <div>{ this.state.title }</div>
-                <div>Author: { this.state.author }</div>
-                <div>{ this.state.date }</div>
-                <div>
-                    <img src={this.state.image} />
+            <div className='single-container'>
+                <div className='single-wrapper'>
+                    <div className='single-header'>
+                        <div>{ this.state.title }</div>
+                        <div>Author: { this.state.author }</div>
+                        <div>{ this.state.date }</div>
+                    </div>
+                    <div className='img'>
+                        <img src={ this.state.image } />
+                    </div>
+                    <div className='post'>{ this.state.post }</div>
+                    {/* add a delete button */ }
                 </div>
-                <div>{ this.state.post }</div>
-                 {/* add a delete button */}
             </div>
 
-           
+
         )
     }
 } 

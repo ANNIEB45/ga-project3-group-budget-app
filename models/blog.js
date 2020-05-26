@@ -7,7 +7,8 @@ const BlogSchema = new Schema({
     author: String,
     date: Date,
     post: String,
-    image: String
+    image: String,
+    headline: String
     
 })
 
