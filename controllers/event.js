@@ -1,5 +1,6 @@
 const express = require('express')
 const eventModel = require('../models/event')
+const expenseModel = require('../models/expenses')
 
 const eventRouter = express.Router()
 
@@ -16,17 +17,22 @@ eventRouter.get('/', (req, res) => {
     })
 })
 
-//Get one
-eventRouter.get('/:eventId', (req, res) => {
-    eventModel.getOneEvent(req.params.eventId)
-    .then(singleEvent => {
-        res.json(singleEvent)
-    })
-        .catch(err => {
+//Get one (by eventId and expenseId)
+eventRouter.get('/:eventId', async (req, res) => {
+    try {
+        const eventId = req.params.eventId
+        const singleEvent = await eventModel.getOneEvent(eventId)
+        const expense = await expenseModel.getExpenseByEventId(eventId)
+
+        const payload = singleEvent.toObject()
+        payload.expense = expense
+        res.json(payload)
+    
+    } catch(err) {
             res.status(500).json(err)
             console.log('failed to get one event 😟😟😟😟 ')
             console.log(err)
-    })
+    }
 })
 
 //Create(Post)
