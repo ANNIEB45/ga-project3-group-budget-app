@@ -5,8 +5,11 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 //Components
 import Home from './components/Home-Component/Home'
 import BlogPage from './components/Blog-Component/BlogMainPage'
+import SingleBlog from './components/Blog-Component/SingleBlog';
+
 
 import './App.css'
+
 
 export default class App extends React.Component {
 
@@ -23,6 +26,7 @@ export default class App extends React.Component {
           <Switch>
             <Route exact path='/event' component={ Home } />
             <Route exact path='/blog' component={ BlogPage } />
+            <Route exact path='/blog/:blogId' component={SingleBlog} />
             <Route exact path='/blog/article' />
             <Route exact path='/blog/resources' />
           </Switch>
