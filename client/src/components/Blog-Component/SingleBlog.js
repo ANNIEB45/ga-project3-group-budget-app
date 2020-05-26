@@ -28,6 +28,8 @@ export default class SingleBlog extends Component{
             console.log(err)
         }
     }
+
+    
     render() {
         return (
             <div>
@@ -38,7 +40,10 @@ export default class SingleBlog extends Component{
                     <img src={this.state.image} />
                 </div>
                 <div>{ this.state.post }</div>
+                 {/* add a delete button */}
             </div>
+
+           
         )
     }
 } 
