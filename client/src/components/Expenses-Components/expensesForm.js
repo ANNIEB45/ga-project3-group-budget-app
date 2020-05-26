@@ -9,7 +9,6 @@ import './Expenses.css'
 export default class ExpensesForm extends Component {
 
     state = {
-        allExpenses: [],
         newExpenses: {
             note: '',
             amount: 0,
@@ -17,36 +16,19 @@ export default class ExpensesForm extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getAllExpenses()
-    }
-
-    getAllExpenses = async () => {
-        try {
-            const res = await axios.get('/api/event')
-            const newState = { ...this.state }
-            newState.allEvents = res.data
-            this.setState(newState)
-        } catch (err) {
-            console.log('failed to get all events')
-            console.log(err)
-        }
-    }
-
-
     handleOnChange = (evt) => {
         const newState = { ...this.state }
         newState.newExpenses[evt.target.name] = evt.target.value
         this.setState(newState)
         console.log(evt.target.value)
-    }
+    } //WORKS
 
     handleOnSubmit = async (evt) => {
         evt.preventDefault()
         console.log('i was clicked')
         try {
             await axios.post('/api/event', this.state.newExpenses)
-            this.getAllExpenses()
+            this.props.getAllExpenses()
         } catch (err) {
             console.log('failed to create event')
             console.log(err)
@@ -94,16 +76,7 @@ export default class ExpensesForm extends Component {
                             /> }
                 </form>
 
-                { this.state.allExpenses.map((expense) => {
-                    return (
-                        <div>
-                            <div>{ expense.category }</div>
-                            <div>{ expense.amount }</div>
-                            <div>{ expense.savedAmt }</div>
-                            <div>{ expense.note }</div>
-                        </div>
-                    )
-                }) }
+           
 
 
             </div>

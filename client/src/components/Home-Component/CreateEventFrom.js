@@ -9,6 +9,7 @@ export default class CreateEventFrom extends Component {
     state = {
         isPaid: false,
         // showExpenseField: false,
+        
         newEvent: {
             name: '',
             date: Date,
@@ -51,10 +52,14 @@ export default class CreateEventFrom extends Component {
     // To Do: when user clicks on radio button it should change to true or change category
     // input field to <select>
 
+
+    
+
     render() {
         return (
             <div>
                 <form
+                    
                     onSubmit={ this.handleSubmit }
                     className='form-field'>
 
@@ -96,13 +101,19 @@ export default class CreateEventFrom extends Component {
                         value={ this.state.newEvent.note }
                         onChange={ this.handleOnChange } />
 
-                    {this.props.showAddEventForm === true? null
-                     : <input
+                    {/* when you click on the button is should disappear */ }
+
+                    <input
+                        onClick={this.props.toggleAddEventField}
                         type="submit"
-                    value="Create Event" />  }
+                        value="Create Event" />
+
                 </form>
 
+                <button>Add Expense</button>
 
+                <ExpenseForm
+                    getAllExpense={ this.props.getAllExpense }/>
 
                 {/* When button is clicked, expense form will show */ }
                 {/* { this.state.showExpenseField === true ? null

@@ -15,6 +15,7 @@ export default class Home extends Component {
 
     state = {
         allEvents: [],
+        allExpenses: [],
         showAddEventForm: false,
         showExpenseField: false,
 
@@ -22,6 +23,7 @@ export default class Home extends Component {
 
     componentDidMount() {
         this.getAllEvents()
+        this.getAllExpenses()
     }
 
     getAllEvents = async () => {
@@ -29,6 +31,18 @@ export default class Home extends Component {
             const res = await axios.get('/api/event')
             const newState = { ...this.state }
             newState.allEvents = res.data.reverse()
+            this.setState(newState)
+        } catch (err) {
+            console.log('failed to get all events')
+            console.log(err)
+        }
+    }
+
+    getAllExpenses = async () => {
+        try {
+            const res = await axios.get('/api/event')
+            const newState = { ...this.state }
+            newState.allEvents = res.data
             this.setState(newState)
         } catch (err) {
             console.log('failed to get all events')
@@ -65,6 +79,13 @@ export default class Home extends Component {
                     <button onClick={ this.toggleAddEventField }>Add New Event</button>
                 </div>
 
+                { this.state.showAddEventForm === true
+                    ? <CreateForm
+                        toggleExpenseField={ this.toggleExpenseField }
+                        toggleAddEventField={ this.toggleAddEventField }
+                        getAllExpenses={ this.getAllExpenses }
+                        getAllEvents={ this.getAllEvents } /> : null }
+
                 { this.state.allEvents.map((event) => {
                     return (
                         <div className='allEvent-form'>
@@ -78,7 +99,18 @@ export default class Home extends Component {
                             <button onClick={ () => this.onDeleteEvent(event._id) }>Delete</button>
 
                             <button onClick={ () => this.toggleExpenseField }>Add Expense</button>
-                           
+
+                        </div>
+                    )
+                }) }
+
+                { this.state.allExpenses.map((expense) => {
+                    return (
+                        <div>
+                            <div>{ expense.category }</div>
+                            <div>{ expense.amount }</div>
+                            <div>{ expense.savedAmt }</div>
+                            <div>{ expense.note }</div>
                         </div>
                     )
                 }) }
@@ -86,16 +118,13 @@ export default class Home extends Component {
                 {/* toggle create box: if no event created
                 show box but if an event is created box will disappear */}
 
-                { this.state.showAddEventForm === true
-                    ? <CreateForm
-                        toggleAddEventField={ this.toggleAddEventField }
-                        getAllEvents={ this.getAllEvents } /> : null }
 
 
-                { this.state.showExpenseField === true
-                    ? <ExpenseForm
-                        getAllEvents={ this.getAllEvents }
-                        toggleExpenseField={ this.toggleExpenseField } /> : null }
+
+                {/* // { this.state.showExpenseField === true
+                //     ? <ExpenseForm
+                //         getAllEvents={ this.getAllEvents }
+                //         toggleExpenseField={ this.toggleExpenseField } /> : null } */}
 
 
 
