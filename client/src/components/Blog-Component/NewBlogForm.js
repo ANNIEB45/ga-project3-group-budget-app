@@ -64,12 +64,14 @@ export default class NewBlogForm extends Component {
                         value={ this.state.newBlog.date }
                         onChange={ this.handleOnchange } />
 
-                    <input
+                    <textarea
                         type="text"
                         name="post"
+                        rows="5"
+                        cols="20"
                         placeholder="Write your post here"
                         value={ this.state.newBlog.post }
-                        onChange={ this.handleOnchange } />
+                        onChange={ this.handleOnchange } ></textarea>
 
                     <input
                         type="submit"
