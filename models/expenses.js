@@ -7,7 +7,9 @@ const ExpenseSchema = new Schema({
     note: String,
     category: String,
     amount: Number,
-    savedAmt: Number
+    savedAmt: Number,
+    title: String
+    
 })
 
 const ExpenseModel = mongoose.model('expense', ExpenseSchema)
