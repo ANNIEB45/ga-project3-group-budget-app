@@ -8,8 +8,7 @@ export default class CreateEventFrom extends Component {
 
     state = {
         isPaid: false,
-        // showExpenseField: false,
-        
+        allExpenses: [],
         newEvent: {
             name: '',
             date: Date,
@@ -38,20 +37,6 @@ export default class CreateEventFrom extends Component {
             console.log(err)
         }
     }
-
-    // toggleExpenseField = () => {
-    //     const showExpenseField = !this.state.showExpenseField;
-    //     this.setState({ showExpenseField })
-    // }
-
-    // toggleRadioButton = (evt) => {
-    //     const categoryValue = !this.state.newEvent.category[evt.target.value]
-    //     this.setState({categoryValue})
-    // }
-
-    // To Do: when user clicks on radio button it should change to true or change category
-    // input field to <select>
-
 
     
 
@@ -109,11 +94,6 @@ export default class CreateEventFrom extends Component {
                         value="Create Event" />
 
                 </form>
-
-                <button>Add Expense</button>
-
-                <ExpenseForm
-                    getAllExpense={ this.props.getAllExpense }/>
 
                 {/* When button is clicked, expense form will show */ }
                 {/* { this.state.showExpenseField === true ? null

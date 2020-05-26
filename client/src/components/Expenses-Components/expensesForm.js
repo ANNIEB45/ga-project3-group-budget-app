@@ -70,14 +70,11 @@ export default class ExpensesForm extends Component {
 
 
                     { this.props.showExpenseField === true ? null
-                       : < input onClick={this.props.showExpenseField}
-                        type="submit"
-                        value="Create Expense"
-                            /> }
+                        : < input onClick={ this.props.showExpenseField }
+                            type="submit"
+                            value="Create Expense"
+                        /> }
                 </form>
-
-           
-
 
             </div>
         )
