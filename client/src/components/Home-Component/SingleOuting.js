@@ -18,7 +18,6 @@ export default class SingleOuting extends Component {
 
     componentDidMount() {
         this.getEvent()
-        // this.getExpense()
         this.getAllExpenses()
     }
 
@@ -28,12 +27,6 @@ export default class SingleOuting extends Component {
         this.setState(res.data)
     }
 
-    // getExpense = async () => {
-    //     console.log('single expense')
-    //     const expenseId = this.props.match.params.expenseId
-    //     const res = await axios.get(`/api/expenses/${expenseId}`)
-    //     this.setState(res.data)
-    // }
 
     getAllExpenses = async () => {
         console.log('get all expense')
