@@ -17,6 +17,6 @@
 
 
 ## ERD
-![ERD](https://imgur.com/WK6SIgx)
+![ERD](https://i.imgur.com/WK6SIgx.jpg)
 
 
