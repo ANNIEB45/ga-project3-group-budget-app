@@ -23,6 +23,7 @@ export default class CreateEventFrom extends Component {
         this.setState(newState)
         console.log(evt.target.value)
     } //WORKS
+    
 
     handleSubmit = async (evt) => {
         evt.preventDefault()
@@ -34,6 +35,7 @@ export default class CreateEventFrom extends Component {
             console.log('failed to create event')
             console.log(err)
         }
+        this.props.toggleAddEventField()
     } //WORKS
 
     
@@ -42,14 +44,13 @@ export default class CreateEventFrom extends Component {
         return (
             <div>
                 <form
-                    
                     onSubmit={ this.handleSubmit }
                     className='form-field'>
 
                     <input
                         type="text"
                         name="outing"
-                        placeholder='Event Name'
+                        placeholder='Outing Name'
                         value={ this.state.newEvent.outing }
                         onChange={ this.handleOnChange } />
 
@@ -85,7 +86,6 @@ export default class CreateEventFrom extends Component {
                         onChange={ this.handleOnChange } />
 
                     <input
-                        onClick={this.props.toggleAddEventField}
                         type="submit"
                         value="Create Event" />
 

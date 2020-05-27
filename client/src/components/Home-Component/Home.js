@@ -21,6 +21,7 @@ export default class Home extends Component {
     }
 
     getAllEvents = async () => {
+        console.log('are we getting here')
         try {
             const res = await axios.get('/api/event')
             const newState = { ...this.state }
@@ -75,9 +76,7 @@ export default class Home extends Component {
 
                 { this.state.showAddEventForm === true
                     ? <CreateForm
-                        toggleExpenseField={ this.toggleExpenseField }
                         toggleAddEventField={ this.toggleAddEventField }
-                        getAllExpenses={ this.getAllExpenses }
                         getAllEvents={ this.getAllEvents } /> : null }
                 {/* CREATE FORM COMPONENT */}
 
@@ -105,11 +104,6 @@ export default class Home extends Component {
                         </div>
                     )
                 }) }
-
-
-
-                {/* toggle create box: if no event created
-                show box but if an event is created box will disappear */}
 
             </div>
         )
