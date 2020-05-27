@@ -16,7 +16,14 @@
 ## Visit **[Weekender App Page]**()
 
 
-## ERD
-![ERD](https://i.imgur.com/WK6SIgx.jpg)
+## *ERD
+![ERD](https://i.imgur.com/WK6SIgxm.jpg)
 
+## *Event Page Wireframe*
+![Event Page](https://i.imgur.com/Y4gl31Em.jpg)
 
+## *Blog Page Wireframe*
+![Blog Page](https://i.imgur.com/vnRlhcum.jpg)
+
+## *Chat Room Wireframe*
+![Chat Room](https://i.imgur.com/X8Cf930m.jpg)
