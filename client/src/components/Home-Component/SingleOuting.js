@@ -5,18 +5,19 @@ import ExpenseForm from '../Expenses-Components/ExpensesForm'
 
 
 export default class SingleOuting extends Component {
+
     state = {
         allExpenses: [],
-        expenses: [],
         name: '',
         date: Date,
         deadline: Date,
         budget: 0,
-        note: ''
+        note: '',
     }
 
     componentDidMount() {
         this.getEvent()
+        // this.getExpense()
         this.getAllExpenses()
     }
 
@@ -37,33 +38,47 @@ export default class SingleOuting extends Component {
             console.log('failed to get all expenses')
             console.log(err)
         }
+    } // WORKS
+
+    onDelete = async (expenseId) => {
+        console.log("i'm deleting")
+        try {
+            await axios.delete(`/api/expenses/${expenseId}`)
+            this.getAllExpenses()
+        } catch (err) {
+            console.log('failed to delete expense')
+            console.log(err)
+        }
     }
+
 
     render() {
         return (
             <div>
-                <h1>{ this.state.name }</h1>
+                <h1>{ this.state.outing }</h1>
                 <h4>Date of Outing: { this.state.date }</h4>
                 <h3>Deadline: { this.state.deadline }</h3>
                 <h2>Budget: { this.state.budget }</h2>
                 <h3>Note: { this.state.note }</h3>
-                 
-                { this.state.expenses.length < 1 ? <div>No Expenses Added</div> : null }
-                
-                <button>Add Expenses</button>
+
+                { this.state.allExpenses.length < 1
+                    ? <div>No Expenses Added</div> :
+                    <button>Add Expense</button> } 
+
                 <ExpenseForm
-                    getAllExpenses={ this.getAllExpenses }/>
-                
-                { this.state.allexpenses.map((expense) => {
+                    getAllExpenses={ this.getAllExpenses }/> 
+
+                { this.state.allExpenses.map((expense) => {
                     return (
                         <div>
+                            { expense.title }
                             { expense.amount }
                             { expense.savedAmt }
                             { expense.note }
-                            {expense.title}
+                        <button onClick={() => this.onDelete(expense._id)}>Delete</button>
                         </div>
                     )
-                })}
+                }) }
             </div>
         )
     }
