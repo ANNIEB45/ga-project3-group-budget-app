@@ -9,6 +9,7 @@ export default class ExpensesForm extends Component {
 
     state = {
         newExpenses: {
+            title: '',
             note: '',
             amount: 0,
             savedAmt: 0
@@ -39,9 +40,19 @@ export default class ExpensesForm extends Component {
     render() {
         return (
             <div>
-                <form className='expense-form'
+                <form
+                    className='expense-form'
                     onSubmit={ this.handleOnSubmit }>
 
+                   
+
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Expense"
+                        value={ this.state.newExpenses.title }
+                        onChange={ this.handleOnChange } />
+                    
                     <label>Amount</label>
                     <input
                         type="number"
