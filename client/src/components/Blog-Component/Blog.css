@@ -93,7 +93,7 @@
     object-fit: cover;
     overflow: inherit;
     border-radius: 3px;
-    margin: 0 auto;
+    margin: 35px 10px 0 0;
 }
 
 img{
@@ -106,7 +106,10 @@ img{
 .content{
     display: flex;
     flex-direction: column;
-    margin: 7px 0 0 20px;
+    margin: 7px 0 0px 20px;
+    width: 50%;
+    /* height: 40%; */
+    border-bottom: 2px solid black;
 }
 
 .content a{
