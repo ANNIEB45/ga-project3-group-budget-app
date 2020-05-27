@@ -34,8 +34,9 @@ export default class ExpensesForm extends Component {
         } catch (err) {
             console.log('failed to create expense')
             console.log(err)
-        }
-    }
+        }   
+    } //WORKS
+// Reset form post submit
 
     render() {
         return (
@@ -43,9 +44,7 @@ export default class ExpensesForm extends Component {
                 <form
                     className='expense-form'
                     onSubmit={ this.handleOnSubmit }>
-
-                   
-
+                    
                     <input
                         type="text"
                         name="title"
@@ -87,6 +86,6 @@ export default class ExpensesForm extends Component {
                 </form>
 
             </div>
-        )
+        ) //WORKS
     }
 }
