@@ -62,31 +62,39 @@ export default class SingleOuting extends Component {
 
     render() {
         return (
-            <div>
-                <h1>{ this.state.outing }</h1>
-                <h4>Date of Outing: {moment(this.state.date).format('ll') }</h4>
-                <h3>Deadline: { moment(this.state.deadline).format('ll') }</h3>
-                <h2>Budget: { this.state.budget }</h2>
-                <h3>Note: { this.state.note }</h3>
+            <div className="single-outing-container">
+                <div className='wrapper'>
+                    <h1>{ this.state.outing }</h1>
+                    <h4>Date of Outing: { moment(this.state.date).format('ll') }</h4>
+                    <h3>Deadline: { moment(this.state.deadline).format('ll') }</h3>
+                    <h2>Budget: { this.state.budget }</h2>
+                    <h3>Note: { this.state.note }</h3>
+                </div>
 
-                { this.state.allExpenses.length < 1
-                    ? <div>No Expenses Added</div> :
-                    <button>Add Expense</button> }
+                <div className='add-button'>
+                    { this.state.allExpenses.length < 1
+                        ? <div>No Expenses Added</div> :
+                        <button>Add Expense</button> }
+                </div>
 
-                <ExpenseForm
-                    getAllExpenses={ this.getAllExpenses } />
+                <div className="expense-container">
+                    <ExpenseForm
+                        getAllExpenses={ this.getAllExpenses } />
+                </div>
 
-                { this.state.allExpenses.map((expense) => {
-                    return (
-                        <div>
-                            { expense.title }
-                            { expense.amount }
-                            { expense.savedAmt }
-                            { expense.note }
-                            <button onClick={ () => this.onDelete(expense._id) }>Delete</button>
-                        </div>
-                    )
-                }) }
+                <div className="expense-field">
+                    { this.state.allExpenses.map((expense) => {
+                        return (
+                            <div className="expense-items">
+                                <div>{ expense.title }</div>
+                                <div>Amount: { expense.amount }</div>
+                                <div>Saved Amount: { expense.savedAmt }</div>
+                                <div>Notes: { expense.note }</div>
+                                <button onClick={ () => this.onDelete(expense._id) }>Delete</button>
+                            </div>
+                        )
+                    }) }
+                </div>
             </div>
         )
     }
