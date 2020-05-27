@@ -16,3 +16,7 @@
 ## Visit **[Weekender App Page]**()
 
 
+## ERD
+![ERD](IMG_3382 2.JPG)
+
+
