@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Icons from './Categories'
 import { Link } from 'react-router-dom'
 
 import './Expenses.css'
@@ -16,6 +15,7 @@ export default class ExpensesForm extends Component {
         }
     }
 
+
     handleOnChange = (evt) => {
         const newState = { ...this.state }
         newState.newExpenses[evt.target.name] = evt.target.value
@@ -23,14 +23,15 @@ export default class ExpensesForm extends Component {
         console.log(evt.target.value)
     } //WORKS
 
+
     handleOnSubmit = async (evt) => {
         evt.preventDefault()
         console.log('i was clicked')
         try {
-            await axios.post('/api/event', this.state.newExpenses)
+            await axios.post('/api/expenses', this.state.newExpenses)
             this.props.getAllExpenses()
         } catch (err) {
-            console.log('failed to create event')
+            console.log('failed to create expense')
             console.log(err)
         }
     }
@@ -69,11 +70,9 @@ export default class ExpensesForm extends Component {
                         onChange={ this.handleOnChange }></textarea>
 
 
-                    { this.props.showExpenseField === true ? null
-                        : < input onClick={ this.props.showExpenseField }
-                            type="submit"
+                    < input type="submit"
                             value="Create Expense"
-                        /> }
+                        /> 
                 </form>
 
             </div>
