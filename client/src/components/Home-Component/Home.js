@@ -89,8 +89,6 @@ export default class Home extends Component {
                     <button onClick={ this.toggleAddEventField }>Add New Event</button>
                 </div>
                 {/* BUTTON WORKS */ }
-
-                <LineChart />
                 
                 { this.state.showAddEventForm === true
                     ? <CreateForm

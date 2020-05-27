@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import moment from 'moment'
 
-import ExpenseForm from '../Expenses-Components/ExpensesForm'
+import ExpenseForm from '../Expenses-Components/expensesForm'
 
 
 export default class SingleOuting extends Component {
