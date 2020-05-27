@@ -91,6 +91,7 @@ export default class Home extends Component {
                 {/* BUTTON WORKS */ }
 
                 <LineChart />
+                
                 { this.state.showAddEventForm === true
                     ? <CreateForm
                         toggleAddEventField={ this.toggleAddEventField }
