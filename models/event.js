@@ -3,7 +3,7 @@ const mongoose = require('./connection.js')
 const Schema = mongoose.Schema
 
 const EventSchema = new Schema({
-    name: String,
+    outing: String,
     category: {
         type: String,
         enum: ['Vacation', 'Concert', 'CabinTrip', 'Road-Trip', 'Party']
@@ -11,7 +11,10 @@ const EventSchema = new Schema({
     date: Date,
     deadline: Date,
     budget: Number,
-    isPaid: Boolean,
+    isPaid: {
+        type: Boolean,
+        default: false,
+    },
     note: String
 })
 

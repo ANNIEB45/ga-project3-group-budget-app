@@ -3,10 +3,13 @@ const mongoose = require('./connection.js')
 const Schema = mongoose.Schema
 
 const ExpenseSchema = new Schema({
+    eventId: String,
     note: String,
     category: String,
     amount: Number,
-    savedAmt: Number
+    savedAmt: Number,
+    title: String
+    
 })
 
 const ExpenseModel = mongoose.model('expense', ExpenseSchema)
@@ -19,6 +22,11 @@ const getAllExpenses = () => {
 //Get One
 const getOneExpense = (expenseId) => {
     return ExpenseModel.findById(expenseId)
+}
+
+// Get by event Id
+const getExpenseByEventId = (eventId) => {
+    return ExpenseModel.findById(eventId)
 }
 
 //Create
@@ -40,6 +48,7 @@ const deleteExpense = (expenseId) => {
 module.exports = {
     getAllExpenses,
     getOneExpense,
+    getExpenseByEventId,
     createExpense,
     updateExpense,
     deleteExpense

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Icons from './Categories'
 import { Link } from 'react-router-dom'
 
 import './Expenses.css'
@@ -9,27 +8,11 @@ import './Expenses.css'
 export default class ExpensesForm extends Component {
 
     state = {
-        allExpenses: [],
         newExpenses: {
+            title: '',
             note: '',
             amount: 0,
             savedAmt: 0
-        }
-    }
-
-    componentDidMount() {
-        this.getAllExpenses()
-    }
-
-    getAllExpenses = async () => {
-        try {
-            const res = await axios.get('/api/event')
-            const newState = { ...this.state }
-            newState.allEvents = res.data
-            this.setState(newState)
-        } catch (err) {
-            console.log('failed to get all events')
-            console.log(err)
         }
     }
 
@@ -39,26 +22,40 @@ export default class ExpensesForm extends Component {
         newState.newExpenses[evt.target.name] = evt.target.value
         this.setState(newState)
         console.log(evt.target.value)
-    }
+    } //WORKS
+
 
     handleOnSubmit = async (evt) => {
         evt.preventDefault()
         console.log('i was clicked')
         try {
-            await axios.post('/api/event', this.state.newExpenses)
-            this.getAllExpenses()
+            // const eventId = this.props.match.params.eventId
+            // const res = await axios.post(`/api/event/${eventId}`, this.state.newExpenses)
+            // this.setState(res.data)
+            await axios.post('/api/expenses', this.state.newExpenses)
+            this.props.getAllExpenses()
+            console.log(this.props.getAllExpenses)
         } catch (err) {
-            console.log('failed to create event')
+            console.log('failed to create expense')
             console.log(err)
-        }
-    }
+        }   
+    } //WORKS
+// Reset form post submit
 
     render() {
         return (
             <div>
-                <form className='expense-form'
+                <form
+                    className='expense-form'
                     onSubmit={ this.handleOnSubmit }>
-
+                    
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Expense"
+                        value={ this.state.newExpenses.title }
+                        onChange={ this.handleOnChange } />
+                    
                     <label>Amount</label>
                     <input
                         type="number"
@@ -87,26 +84,15 @@ export default class ExpensesForm extends Component {
                         onChange={ this.handleOnChange }></textarea>
 
 
-                    { this.props.showExpenseField === true ? null
-                       : < input onClick={this.props.showExpenseField}
-                        type="submit"
-                        value="Create Expense"
-                            /> }
+                    < input type="submit"
+                            value="Create Expense"
+                        /> 
                 </form>
 
-                { this.state.allExpenses.map((expense) => {
-                    return (
-                        <div>
-                            <div>{ expense.category }</div>
-                            <div>{ expense.amount }</div>
-                            <div>{ expense.savedAmt }</div>
-                            <div>{ expense.note }</div>
-                        </div>
-                    )
-                }) }
-
-
             </div>
-        )
+        ) //WORKS
     }
 }
+
+// BUGS: 
+    // EXPENSE ARE POPULATION ON EVERY EVENT
