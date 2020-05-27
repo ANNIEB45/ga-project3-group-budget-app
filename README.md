@@ -19,8 +19,8 @@
 ## *ERD
 ![ERD](https://i.imgur.com/WK6SIgxm.jpg)
 
-## *Event Page Wireframe*
-![Event Page](https://i.imgur.com/Y4gl31Em.jpg)
+## *Event Page Wireframe*                                 
+![Event Page](https://i.imgur.com/Y4gl31Em.jpg)            
 
 ## *Blog Page Wireframe*
 ![Blog Page](https://i.imgur.com/vnRlhcum.jpg)
