@@ -6,16 +6,16 @@ const blogRouter = require('./controllers/blog.js')
 const app = express()
 
 app.use(express.json())
-app.use(express.static(`${__dirname}/client/build`))
+app.use(express.static(__dirname + '/client/build/'))
 
 app.use('/api/event', eventRouter)
 app.use('/api/expenses', expenseRouter)
 app.use('/api/blog', blogRouter)
 
 
-app.get('/*', (req, res) => {
-    res.sendFile(`${__dirname}/client/build/index.html`)
-})
+app.get('/', (req,res) => {
+    res.sendFile(__dirname + '/client/build/index.html')
+  })
 
 
 const PORT = process.env.PORT || 3001
