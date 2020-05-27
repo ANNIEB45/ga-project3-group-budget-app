@@ -9,6 +9,9 @@
     "start": "node server.js",
     "postinstall": "cd client && npm i && npm run build"
   },
+  "engines": {
+    "node": "10.x"
+  },
   "author": "Annie T. Bellefleur",
   "license": "ISC",
   "dependencies": {
