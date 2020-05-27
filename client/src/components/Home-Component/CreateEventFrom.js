@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-import ExpenseForm from '../Expenses-Components/ExpensesForm'
 
 export default class CreateEventFrom extends Component {
 
     state = {
-        isPaid: false,
-        allExpenses: [],
         newEvent: {
-            name: '',
+            outing: '',
             date: Date,
             deadline: Date,
             budget: 0,
@@ -19,12 +16,13 @@ export default class CreateEventFrom extends Component {
 
     }
 
+
     handleOnChange = (evt) => {
         const newState = { ...this.state }
         newState.newEvent[evt.target.name] = evt.target.value
         this.setState(newState)
         console.log(evt.target.value)
-    }
+    } //WORKS
 
     handleSubmit = async (evt) => {
         evt.preventDefault()
@@ -36,7 +34,7 @@ export default class CreateEventFrom extends Component {
             console.log('failed to create event')
             console.log(err)
         }
-    }
+    } //WORKS
 
     
 
@@ -50,9 +48,9 @@ export default class CreateEventFrom extends Component {
 
                     <input
                         type="text"
-                        name="name"
+                        name="outing"
                         placeholder='Event Name'
-                        value={ this.state.newEvent.name }
+                        value={ this.state.newEvent.outing }
                         onChange={ this.handleOnChange } />
 
                     <label>Date</label>
@@ -86,8 +84,6 @@ export default class CreateEventFrom extends Component {
                         value={ this.state.newEvent.note }
                         onChange={ this.handleOnChange } />
 
-                    {/* when you click on the button is should disappear */ }
-
                     <input
                         onClick={this.props.toggleAddEventField}
                         type="submit"
@@ -95,13 +91,7 @@ export default class CreateEventFrom extends Component {
 
                 </form>
 
-                {/* When button is clicked, expense form will show */ }
-                {/* { this.state.showExpenseField === true ? null
-                    : <button onClick={ this.toggleExpenseField }>Add Expense</button> } */}
-
-
-
             </div>
-        )
+        ) //WORKS
     }
 }
