@@ -83,46 +83,45 @@ export default class Home extends Component {
         const { allEvents, isPaid } = this.state
         console.log('all events:', this.state.allEvents)
         return (
-            <div>
+            <div className='container'>
                 <div className='create-box'>
                     <div>Create An Event</div>
                     <button onClick={ this.toggleAddEventField }>Add New Event</button>
                 </div>
                 {/* BUTTON WORKS */ }
 
-                <LineChart />
-                
                 { this.state.showAddEventForm === true
                     ? <CreateForm
                         toggleAddEventField={ this.toggleAddEventField }
                         getAllEvents={ this.getAllEvents } /> : null }
                 {/* CREATE FORM COMPONENT */ }
 
-                { allEvents.map((event) => {
-                    return (
+                <div className="event-wrapper">
+                    { allEvents.map((event) => {
+                        return (
 
-                        <div className='allEvent-form'>
-                            <Link to={ `/event/${event._id}` }>
-                                <div> { event.outing } </div>
-                            </Link>
-                            <div>Date of Event:{moment(event.date).format('ll') }</div>
-                            <div>Deadline: { moment(event.deadline).format('ll') }</div>
-                            <div>Budget:{ event.budget }</div>
-                            <div>Notes:{ event.note }</div>
+                            <div className='allEvent-form'>
+                                <Link to={ `/event/${event._id}` }>
+                                    <div> { event.outing } </div>
+                                </Link>
+                                <div>Date of Event:{ moment(event.date).format('ll') }</div>
+                                <div>Deadline: { moment(event.deadline).format('ll') }</div>
+                                <div>Budget:{ event.budget }</div>
+                                <div>Notes:{ event.note }</div>
 
-                            { isPaid === true
-                                ? <button className="material-icons" onClick={ () => this.onPaidOuting(event._id) }> payment </button> : <button className="material-icons" > receipt </button>
-                                // fix this
-                            }
+                                {/* { isPaid === true
+                                    ? <button className="material-icons" onClick={ () => this.onPaidOuting(event._id) }> payment </button> : <button className="material-icons" > receipt </button>
+                                    // fix this
+                                } */}
 
 
-                            <button onClick={ () => this.onDeleteEvent(event._id) }>Delete</button>
-                            {/* DELETE BUTTON WORKS */ }
+                                <button onClick={ () => this.onDeleteEvent(event._id) }>Delete</button>
+                                {/* DELETE BUTTON WORKS */ }
 
-                        </div>
-                    )
-                }) }
-
+                            </div>
+                        )
+                    }) }
+                </div>
             </div>
         )
     } //NOT FULLY FUNCTIONAL

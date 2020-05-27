@@ -32,7 +32,7 @@ export default class App extends React.Component {
           </Switch>
 
           <footer className='footer'>
-          <div>footer Info here</div>
+          <div>Created by Annie T. Bellefleur</div>
         </footer>
 
         </Router>

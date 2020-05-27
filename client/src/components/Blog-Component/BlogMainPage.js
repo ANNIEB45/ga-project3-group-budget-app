@@ -76,24 +76,25 @@ export default class BlogMainPage extends React.Component {
                 {/* <BlogForm
                     getAllBlogs={ this.getAllBlogs }/> */}
 
-
-                { this.state.allBlogs.map((blog) => {
-                    return (
-                        <div className='content-container'>
-                            <div className='content-wrapper'>
-                                <img src={ blog.image } />
-                                <div className='content'>
-                                    <Link to={ `/blog/${blog._id}` }>
-                                        <div className='title'>{ blog.title }</div>
-                                        <div className='author'>{ blog.author }</div>
-                                    </Link>
-                                    <div className="headline">{ blog.headline }</div>
-                                    {/* <button onClick={() => this.onDeleteBlog(blog._id)}>Delete</button> */}
+                <div className="blog-content-container">
+                    { this.state.allBlogs.map((blog) => {
+                        return (
+                            <div className='content-container'>
+                                <div className='content-wrapper'>
+                                    <img src={ blog.image } />
+                                    <div className='content'>
+                                        <Link to={ `/blog/${blog._id}` }>
+                                            <div className='title'>{ blog.title }</div>
+                                            <div className='author'>{ blog.author }</div>
+                                        </Link>
+                                        <div className="headline">{ blog.headline }</div>
+                                        {/* <button onClick={() => this.onDeleteBlog(blog._id)}>Delete</button> */ }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                }) }
+                        )
+                    }) }
+                </div>
 
             </div>
 
