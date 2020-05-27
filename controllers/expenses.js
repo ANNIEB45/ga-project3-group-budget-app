@@ -1,72 +1,80 @@
 const express = require('express')
 const expenseModel = require('../models/expenses')
+const eventModel = require('../models/event')
 
 const expenseRouter = express.Router()
 
 //Get all
 expenseRouter.get('/', (req, res) => {
     expenseModel.getAllExpenses()
-    .then(allExpenses => {
-        res.json(allExpenses)
-    })
+        .then(allExpenses => {
+            res.json(allExpenses)
+        })
         .catch(err => {
             res.statusCode(500).json(err)
             console.log('failed to get all expense 😟😟😟😟 ')
             console.log(err)
-    })
+        })
 })
 
 //Get one
 expenseRouter.get('/:expenseId', (req, res) => {
     expenseModel.getOneExpense(req.params.expenseId)
-    .then(singleExpense => {
-        res.json(singleExpense)
-    })
+        .then(singleExpense => {
+            res.json(singleExpense)
+        })
         .catch(err => {
             res.statusCode(500).json(err)
             console.log('failed to get one expense 😟😟😟😟 ')
             console.log(err)
-    })
+        })
 })
 
 //Create(Post)
 expenseRouter.post('/', (req, res) => {
     expenseModel.createExpense(req.body)
-    .then(()=> {
-        res.json('created')
-    })
-        .catch(err => {
+        .then(() => {
+            res.json('created')
+        }).catch(err => {
             res.statusCode(500).json(err)
             console.log('failed to create expense 😟😟😟😟 ')
             console.log(err)
-    })
+        })
 })
+
+
+// expenseRouter.post('/event/:eventId', (req, res) => {
+//     expenseModel.createExpense(req.body)
+//     .then(()=> {
+//         res.json(`/api/event/${req.body.eventId}`)
+//     })
+
 
 //Update(Put)
 expenseRouter.put('/:expenseId', (req, res) => {
     expenseModel.updateExpense(req.params.expenseId, req.body)
-    .then(()=> {
-        res.json('updated')
-    })
+        .then(() => {
+            res.json('updated')
+        })
         .catch(err => {
             res.statusCode(500).json(err)
             console.log('failed to update expense 😟😟😟😟 ')
             console.log(err)
-    })
+        })
 })
 
 
 //Delete
 expenseRouter.delete('/:expenseId', (req, res) => {
     expenseModel.deleteExpense(req.params.expenseId)
-    .then(()=> {
-        res.json('deleted')
-    })
+        .then(() => {
+            res.json('deleted')
+        })
         .catch(err => {
             res.statusCode(500).json(err)
             console.log('failed to delete expense 😟😟😟😟 ')
             console.log(err)
-    })
+        })
 })
 
 module.exports = expenseRouter

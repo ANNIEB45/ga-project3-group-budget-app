@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 import CreateForm from './CreateEventFrom'
 import SingleEvent from './SingleOuting'
+import LineChart from './LineChart'
 
 import './Home.css'
 
@@ -12,12 +14,15 @@ export default class Home extends Component {
 
     state = {
         allEvents: [],
+        allExpenses: [],
         showAddEventForm: false,
         showExpenseField: false,
     }
 
+
     componentDidMount() {
         this.getAllEvents()
+        this.getAllExpenses()
     }
 
     getAllEvents = async () => {
@@ -33,7 +38,18 @@ export default class Home extends Component {
         }
     } //getAll Events function-WORKS
 
-
+    getAllExpenses = async () => {
+        console.log('all expenses here')
+        try {
+            const res = await axios.get('/api/expenses')
+            const newState = { ...this.state }
+            newState.allExpenses = res.data
+            this.setState(newState)
+        } catch (err) {
+            console.log('failed to get all expense')
+            console.log(err)
+        }
+    }
 
     onDeleteEvent = async (eventId) => {
         try {
@@ -71,14 +87,15 @@ export default class Home extends Component {
                 <div className='create-box'>
                     <div>Create An Event</div>
                     <button onClick={ this.toggleAddEventField }>Add New Event</button>
-                </div> 
-                {/* BUTTON WORKS */}
+                </div>
+                {/* BUTTON WORKS */ }
 
+                <LineChart />
                 { this.state.showAddEventForm === true
                     ? <CreateForm
                         toggleAddEventField={ this.toggleAddEventField }
                         getAllEvents={ this.getAllEvents } /> : null }
-                {/* CREATE FORM COMPONENT */}
+                {/* CREATE FORM COMPONENT */ }
 
                 { allEvents.map((event) => {
                     return (
@@ -87,8 +104,8 @@ export default class Home extends Component {
                             <Link to={ `/event/${event._id}` }>
                                 <div> { event.outing } </div>
                             </Link>
-                            <div>Date of Event:{ event.date }</div>
-                            <div>Deadline: { event.deadline }</div>
+                            <div>Date of Event:{moment(event.date).format('ll') }</div>
+                            <div>Deadline: { moment(event.deadline).format('ll') }</div>
                             <div>Budget:{ event.budget }</div>
                             <div>Notes:{ event.note }</div>
 
@@ -99,7 +116,7 @@ export default class Home extends Component {
 
 
                             <button onClick={ () => this.onDeleteEvent(event._id) }>Delete</button>
-                            {/* DELETE BUTTON WORKS */}
+                            {/* DELETE BUTTON WORKS */ }
 
                         </div>
                     )

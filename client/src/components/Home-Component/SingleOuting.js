@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import moment from 'moment'
 
 import ExpenseForm from '../Expenses-Components/ExpensesForm'
 
@@ -27,8 +28,15 @@ export default class SingleOuting extends Component {
         this.setState(res.data)
     }
 
+    // getExpense = async () => {
+    //     console.log('single expense')
+    //     const expenseId = this.props.match.params.expenseId
+    //     const res = await axios.get(`/api/expenses/${expenseId}`)
+    //     this.setState(res.data)
+    // }
 
     getAllExpenses = async () => {
+        console.log('get all expense')
         try {
             const res = await axios.get('/api/expenses')
             const newState = { ...this.state }
@@ -56,17 +64,17 @@ export default class SingleOuting extends Component {
         return (
             <div>
                 <h1>{ this.state.outing }</h1>
-                <h4>Date of Outing: { this.state.date }</h4>
-                <h3>Deadline: { this.state.deadline }</h3>
+                <h4>Date of Outing: {moment(this.state.date).format('ll') }</h4>
+                <h3>Deadline: { moment(this.state.deadline).format('ll') }</h3>
                 <h2>Budget: { this.state.budget }</h2>
                 <h3>Note: { this.state.note }</h3>
 
                 { this.state.allExpenses.length < 1
                     ? <div>No Expenses Added</div> :
-                    <button>Add Expense</button> } 
+                    <button>Add Expense</button> }
 
                 <ExpenseForm
-                    getAllExpenses={ this.getAllExpenses }/> 
+                    getAllExpenses={ this.getAllExpenses } />
 
                 { this.state.allExpenses.map((expense) => {
                     return (
@@ -75,7 +83,7 @@ export default class SingleOuting extends Component {
                             { expense.amount }
                             { expense.savedAmt }
                             { expense.note }
-                        <button onClick={() => this.onDelete(expense._id)}>Delete</button>
+                            <button onClick={ () => this.onDelete(expense._id) }>Delete</button>
                         </div>
                     )
                 }) }

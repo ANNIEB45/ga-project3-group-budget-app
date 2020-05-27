@@ -29,8 +29,12 @@ export default class ExpensesForm extends Component {
         evt.preventDefault()
         console.log('i was clicked')
         try {
+            // const eventId = this.props.match.params.eventId
+            // const res = await axios.post(`/api/event/${eventId}`, this.state.newExpenses)
+            // this.setState(res.data)
             await axios.post('/api/expenses', this.state.newExpenses)
             this.props.getAllExpenses()
+            console.log(this.props.getAllExpenses)
         } catch (err) {
             console.log('failed to create expense')
             console.log(err)
@@ -89,3 +93,6 @@ export default class ExpensesForm extends Component {
         ) //WORKS
     }
 }
+
+// BUGS: 
+    // EXPENSE ARE POPULATION ON EVERY EVENT
