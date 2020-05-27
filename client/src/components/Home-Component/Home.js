@@ -30,9 +30,9 @@ export default class Home extends Component {
             console.log('failed to get all events')
             console.log(err)
         }
-    }
+    } //getAll Events function-WORKS
 
-   
+
 
     onDeleteEvent = async (eventId) => {
         try {
@@ -42,35 +42,36 @@ export default class Home extends Component {
             console.log('failed to delete event')
             console.log(err)
         }
-    }
+    } //DELETE EVENT FUNCTION- WORKS
 
     onPaidOuting = async (eventId) => {
-        try{
+        try {
             await axios.put(`/api/event/${eventId}`, { isPaid: true })
             console.log(eventId)
-                this.getAllEvents()
+            this.getAllEvents()
         } catch (err) {
             console.log('failed to update isPaid')
             console.log(err)
-            }
-    }
+        }
+    } //DOES NOT WORK
 
     toggleAddEventField = () => {
         const showAddEventForm = !this.state.showAddEventForm;
         this.setState({ showAddEventForm })
-    }
+    } //WORKS
 
 
 
     render() {
-        const { allEvents,isPaid } = this.state
+        const { allEvents, isPaid } = this.state
         console.log('all events:', this.state.allEvents)
         return (
             <div>
                 <div className='create-box'>
                     <div>Create An Event</div>
                     <button onClick={ this.toggleAddEventField }>Add New Event</button>
-                </div>
+                </div> 
+                {/* BUTTON WORKS */}
 
                 { this.state.showAddEventForm === true
                     ? <CreateForm
@@ -78,6 +79,7 @@ export default class Home extends Component {
                         toggleAddEventField={ this.toggleAddEventField }
                         getAllExpenses={ this.getAllExpenses }
                         getAllEvents={ this.getAllEvents } /> : null }
+                {/* CREATE FORM COMPONENT */}
 
                 { allEvents.map((event) => {
                     return (
@@ -94,11 +96,11 @@ export default class Home extends Component {
                             { isPaid === true
                                 ? <button className="material-icons" onClick={ () => this.onPaidOuting(event._id) }> payment </button> : <button className="material-icons" > receipt </button>
                                 // fix this
-
                             }
 
 
                             <button onClick={ () => this.onDeleteEvent(event._id) }>Delete</button>
+                            {/* DELETE BUTTON WORKS */}
 
                         </div>
                     )
