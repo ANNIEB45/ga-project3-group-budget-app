@@ -13,7 +13,7 @@
 * Blog post-no real data yet
 * Podcast (coming soon)
 
-## Visit **[Weekender App Page]**()
+## Visit **[Weekender App Page]**(https://group-budget-app.herokuapp.com/event)
 
 
 ## *ERD
