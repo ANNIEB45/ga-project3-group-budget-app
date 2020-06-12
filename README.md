@@ -26,4 +26,4 @@
 ![Blog Page](https://i.imgur.com/vnRlhcum.jpg)
 
 ## *Chat Room Wireframe*
-![Chat Room](https://i.imgur.com/X8Cf930m.jpg)
+[Chat Room](https://i.imgur.com/X8Cf930m.jpg)
